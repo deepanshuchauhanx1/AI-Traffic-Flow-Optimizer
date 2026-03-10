@@ -281,7 +281,7 @@ Model performance is evaluated using:
 
 ---
 
-## Author
+## Authors
 
 [Deepanshu Chauhan](https://github.com/deepanshux1)
 
