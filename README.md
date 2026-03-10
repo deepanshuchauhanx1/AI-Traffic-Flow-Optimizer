@@ -218,7 +218,9 @@ git clone https://github.com/deepanshuchauhanx1/AI-Traffic-Flow-Optimizer
 Install dependencies:
 
 pip install ultralytics
+
 pip install opencv-python
+
 pip install torch torchvision
 
 ---
@@ -276,14 +278,6 @@ Model performance is evaluated using:
 * Smart city IoT integration
 * Predictive traffic congestion analysis
 * Edge AI deployment for real-time inference
-
----
-
-## References
-
-YOLOv8 – Ultralytics
-SUMO Traffic Simulator
-Emergency Vehicle Detection Research Papers
 
 ---
 
