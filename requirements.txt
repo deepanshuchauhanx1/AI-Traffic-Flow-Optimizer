@@ -1,0 +1,8 @@
+pandas
+numpy
+matplotlib
+seaborn
+opencv-python
+kagglehub
+ultralytics
+torch
