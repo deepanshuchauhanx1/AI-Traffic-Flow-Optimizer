@@ -39,6 +39,4 @@ ruff==0.6.9                   # Linter + formatter (replaces flake8 + black)
 pre-commit==3.8.0             # Git hooks for lint on commit
 python-dotenv==1.0.1          # Load .env files for local config
 
-# ─── Demo UI (Phase 4 — install separately) ───────────────────────────────────
-# streamlit==1.38.0
-# gradio==4.44.0
+
