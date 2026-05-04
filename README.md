@@ -2,7 +2,7 @@
 
 A beginner-friendly project that:
 - Takes an **image or video** as input
-- Runs your **model.pkl** emergency vehicle detector
+- Runs **model.pkl** emergency vehicle detector
 - Returns **vehicle count**, **density**, and **density per second** (video)
 
 ---
