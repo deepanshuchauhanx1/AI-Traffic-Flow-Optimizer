@@ -1,99 +1,81 @@
-# AI Traffic Flow Optimizer
+# 🚨 Emergency Vehicle Detector — End-to-End Project
 
-An end-to-end AI system that detects and tracks vehicles in traffic footage, identifies emergency vehicles, and optimizes traffic signal timing using a YOLO-based model.
+A beginner-friendly project that:
+- Takes an **image or video** as input
+- Runs your **model.pkl** emergency vehicle detector
+- Returns **vehicle count**, **density**, and **density per second** (video)
 
 ---
 
-## Project Structure
+## 📁 Project Structure
 
 ```
-AI-Traffic-Flow-Optimizer/
-├── elements/
-│   └── traffic.mp4            # Sample traffic footage
-├── notebooks/
-│   ├── 01_dataset_eda.ipynb       # Dataset exploration & class distribution
-│   ├── 02_model_training_yolov8.ipynb  # YOLOv8 training pipeline
-│   ├── 03_traffic_pipeline.ipynb  # End-to-end inference pipeline
-│   └── 04_tracking_and_signal.ipynb   # Vehicle tracking + signal optimization
-├── best (1).pt                # Trained YOLOv8 weights
-├── main.py                    # FastAPI inference server
-├── requirements.txt
-└── README.md
+emergency-vehicle-detector/
+├── backend/
+│   ├── main.py           ← FastAPI app (your API)
+│   ├── requirements.txt  ← Python packages
+│   ├── Dockerfile        ← Containerise the backend
+│   └── model.pkl         ← ⬅ PUT YOUR MODEL HERE
+│
+├── frontend/
+│   └── index.html
+│   └── style.css
+│   └── script.js
+│
+├── docker-compose.yml    ← Run everything with one command
+└── README.md             ← This file
 ```
 
----
+## 🔌Backend API Endpoints
 
-## Setup
+| Method | URL | Input | Output |
+|--------|-----|-------|--------|
+| POST | `/detect/image` | image file (JPG/PNG) | count, density, confidence |
+| POST | `/detect/video` | video file (MP4/AVI) | count, duration, density/sec |
+| GET  | `/health`       | — | model status |
+| GET  | `/docs`         | — | Swagger UI |
 
-```bash
-# Clone the repo
-git clone https://github.com/your-username/AI-Traffic-Flow-Optimizer
-cd AI-Traffic-Flow-Optimizer
 
-# Create virtual environment
-python -m venv .myenv
-source .myenv/bin/activate        # Windows: .myenv\Scripts\activate
-
-# Install dependencies
-pip install -r requirements.txt
-```
-
----
-
-## Run the API
-
-```bash
-uvicorn main:app --reload --port 8000
-```
-
-Swagger UI → http://localhost:8000/docs
-
----
-
-## Notebooks — Run in Order
-
-| Notebook | Purpose |
-|----------|---------|
-| `01_dataset_eda.ipynb` | Explore dataset, check class balance, visualize samples |
-| `02_model_training_yolov8.ipynb` | Train YOLOv8 on vehicle + emergency vehicle classes |
-| `03_traffic_pipeline.ipynb` | Run full inference pipeline on traffic footage |
-| `04_tracking_and_signal.ipynb` | Vehicle tracking + adaptive signal timing logic |
-
----
-
-## Model
-
-- **Architecture:** YOLOv8 (weights: `best (1).pt`)
-- **Top-1 Accuracy:** 85% · **Top-5 Accuracy:** 100%
-- **Classes:** TwoWheelers, ambulance, auto-rikshaw, bus, car, firetruck, police vehicle
-- **Emergency classes:** ambulance · firetruck · police vehicle
-
----
-
-## API Endpoints
-
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| POST | `/detect/image` | Detect vehicles in an image + density grid |
-| POST | `/detect/video` | Frame-by-frame analysis + timeline |
-| POST | `/detect/batch` | Classify multiple images at once |
-| GET  | `/health` | Model status check |
-
----
-
-## Quick Example
-
-```bash
-# Test with the sample video
-curl -X POST "http://localhost:8000/detect/video?sample_rate=5" \
-  -F "file=@elements/traffic.mp4"
+### Example Response (Video):
+```json
+{
+  "total_detections": 5,
+  "duration_seconds": 12.4,
+  "density_per_second": 0.403,
+  "density_label": "Medium",
+  "frames_analyzed": 12,
+  "message": "Analyzed 12 frames over 12.4s."
+}
 ```
 
 ---
 
-## Built With
+## 🧠 How It Works (for learning)
 
-- [Ultralytics YOLOv8](https://docs.ultralytics.com/) — detection & classification
-- [FastAPI](https://fastapi.tiangolo.com/) — inference API
-- [OpenCV](https://opencv.org/) — video processing
-- [PyTorch](https://pytorch.org/) — model backend
+```
+User uploads file
+       ↓
+FastAPI reads the file bytes
+       ↓
+OpenCV decodes → numpy array (frame)
+       ↓
+Resize to 224×224 → normalize → flatten
+       ↓
+model.pkl.predict() → label (0 or 1)
+       ↓
+Count detections → calculate density
+       ↓
+Return JSON response
+       ↓
+Frontend shows results
+```
+
+
+## 📊 Model Stats
+
+| Metric | Score |
+|--------|-------|
+| Top-1 Accuracy | 85.05% |
+| Fitness Score | 92.5% |
+
+---
