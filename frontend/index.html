@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Emergency Vehicle Detection</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Barlow+Condensed:wght@300;400;600;700;900&family=Barlow:wght@300;400&display=swap" rel="stylesheet">
+
+  <!-- Our CSS -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ===================== HEADER ===================== -->
+  <header>
+    <div class="logo">
+      <div class="logo-icon">🚨</div>
+      <div class="logo-text">EV<span>DETECT</span></div>
+    </div>
+    <div class="status-badge">
+      <div class="status-dot" id="statusDot"></div>
+      <span id="statusText">CHECKING API...</span>
+    </div>
+  </header>
+
+  <!-- ===================== MAIN ===================== -->
+  <main>
+    <h1 class="page-title">Emergency<br><span class="highlight">Vehicle</span><br>Detection</h1>
+    <p class="page-subtitle">// upload image or video → get count + density analysis</p>
+
+    <!-- TAB SWITCHER -->
+    <div class="tabs">
+      <button class="tab-btn active" onclick="switchTab('image')">📷 Image</button>
+      <button class="tab-btn"        onclick="switchTab('video')">🎬 Video</button>
+    </div>
+
+    <!-- ============ IMAGE TAB ============ -->
+    <div class="tab-panel active" id="tab-image">
+
+      <div class="upload-zone" id="imageZone">
+        <input type="file" id="imageFile"
+               accept="image/jpeg,image/png,image/bmp,image/webp"
+               onchange="onFileSelected('image')">
+        <span class="upload-icon">📸</span>
+        <div class="upload-title">Drop Image Here</div>
+        <div class="upload-hint">JPG · PNG · BMP · WEBP &nbsp;|&nbsp; max 20MB</div>
+      </div>
+
+      <div class="preview-wrap" id="imagePreview">
+        <img id="imagePreviewEl" src="" alt="preview">
+        <div class="preview-name" id="imagePreviewName"></div>
+      </div>
+
+      <button class="btn-analyze" id="imageBtn" onclick="analyzeImage()" disabled>
+        ANALYZE IMAGE
+      </button>
+      <div class="loading-bar" id="imageLoadingBar">
+        <div class="loading-bar-fill"></div>
+      </div>
+      <div class="loading-text" id="imageLoadingText">RUNNING DETECTION MODEL...</div>
+
+      <div class="error-box" id="imageError"></div>
+      <div class="results"   id="imageResults"></div>
+    </div>
+
+    <!-- ============ VIDEO TAB ============ -->
+    <div class="tab-panel" id="tab-video">
+
+      <div class="upload-zone" id="videoZone">
+        <input type="file" id="videoFile"
+               accept="video/mp4,video/avi,video/quicktime,video/x-matroska"
+               onchange="onFileSelected('video')">
+        <span class="upload-icon">🎥</span>
+        <div class="upload-title">Drop Video Here</div>
+        <div class="upload-hint">MP4 · AVI · MOV · MKV &nbsp;|&nbsp; max 100MB</div>
+      </div>
+
+      <div class="preview-wrap" id="videoPreview">
+        <video id="videoPreviewEl" controls muted></video>
+        <div class="preview-name" id="videoPreviewName"></div>
+      </div>
+
+      <button class="btn-analyze" id="videoBtn" onclick="analyzeVideo()" disabled>
+        ANALYZE VIDEO
+      </button>
+      <div class="loading-bar" id="videoLoadingBar">
+        <div class="loading-bar-fill"></div>
+      </div>
+      <div class="loading-text" id="videoLoadingText">PROCESSING FRAMES... THIS MAY TAKE A MOMENT</div>
+
+      <div class="error-box" id="videoError"></div>
+      <div class="results"   id="videoResults"></div>
+    </div>
+
+  </main>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer>
+    <span>EVDETECT</span> &nbsp;·&nbsp; Emergency Vehicle Detection System &nbsp;·&nbsp;
+    Model Top-1 Accuracy: <span>85.05%</span> &nbsp;·&nbsp; Fitness Score: <span>0.9253</span>
+  </footer>
+
+  <!-- Our JS (loaded at bottom so HTML is ready first) -->
+  <script src="script.js"></script>
+
+</body>
+</html>
