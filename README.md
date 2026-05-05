@@ -1,12 +1,19 @@
-# 🚨 Emergency Vehicle Detector — End-to-End Project
+# AI-Traffic-Flow-Optimizer
+## 🚨 Emergency Vehicle Detector — End-to-End Project
 
 A end to end project that:
 - Takes an **image or video** as input
 - Runs **model.pkl** emergency vehicle detector
 - Returns **vehicle count**, **density**, and **density per second** (video)
 
-# Project Status
+## Project Status
 Still Working on some things to make it better 
+
+## Tech Stack
+ML: YOLOv8, OpenCV
+Backend: FastAPI
+Frontend: HTML, CSS, JavaScript
+Deployment: Docker
 
 ---
 
@@ -38,6 +45,29 @@ emergency-vehicle-detector/
 └── README.md
 ```
 
+## Model
+
+- Framework: YOLOv8  
+- Task: Multi-class object detection  
+- Trained on GPU T4 Google collab  
+- Exported model: `model.pkl`
+
+## Model Predictions
+
+Below are sample predictions from the trained model on test images.
+
+| Two Wheeler | Police Vehicle |
+|------------|---------------|
+| ![](assets/predictions/two_wheelers.png) | ![](assets/predictions/police_vehicle.png) |
+
+| Ambulance | Ambulance |
+|-----------|----------|
+| ![](assets/predictions/ambulance_1.png) | ![](assets/predictions/ambulance_2.png) |
+
+| Bus |
+|-----|
+| ![](assets/predictions/bus.png) |
+  
 ## 🔌Backend API Endpoints
 
 | Method | URL | Input | Output |
@@ -90,7 +120,32 @@ Frontend shows results
 | Top-1 Accuracy | 85.05% |
 | Fitness Score | 92.5% |
 
+## Current Limitations
+- Class imbalance affects detection performance
+- Limited robustness in dense traffic scenarios
+- No object tracking (frame-level detection only)
+- Dataset noise (unknown labels) impacts learning
+
 ---
-# Future work:
-- Connect Front End 
-- deployment
+## Future work:
+### Model & ML
+- Improve performance using hyperparameter tuning
+- Introduce object tracking (DeepSORT / ByteTrack)
+- Handle class imbalance with augmentation and weighting
+- Reduce false positives in crowded scenes
+### Traffic Intelligence
+- Dynamic signal timing based on density
+- Lane-level traffic analysis
+- Emergency vehicle priority routing
+- Real-Time System
+- Live CCTV stream integration
+- Edge deployment (Jetson / Raspberry Pi)
+- Low-latency inference optimization
+### Backend & Infrastructure
+- Cloud deployment (AWS / GCP)
+- CI/CD for model updates
+- Model versioning and experiment tracking
+- Analytics & Monitoring
+- Real-time dashboard
+- Logging and monitoring
+- Feedback loop for continuous learning
