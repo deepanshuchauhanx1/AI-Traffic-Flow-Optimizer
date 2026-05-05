@@ -5,25 +5,37 @@ A beginner-friendly project that:
 - Runs **model.pkl** emergency vehicle detector
 - Returns **vehicle count**, **density**, and **density per second** (video)
 
+# Project Status
+Still Working on some things to make it better 
+
 ---
 
 ## 📁 Project Structure
 
 ```
 emergency-vehicle-detector/
-├── backend/
-│   ├── main.py           ← FastAPI app (your API)
-│   ├── requirements.txt  ← Python packages
-│   ├── Dockerfile        ← Containerise the backend
-│   └── model.pkl         
 │
-├── frontend/
-│   └── index.html
-│   └── style.css
-│   └── script.js
+├── notebooks/                          ← Research & experimentation
+│   ├── 01_dataset_eda.ipynb            ← Exploratory data analysis
+│   ├── 02_model_training_yolov8.ipynb  ← YOLOv8 model training
+│   ├── 03_traffic_pipeline.ipynb       ← Traffic detection pipeline
+│   └── 04_tracking_and_signal.ipynb    ← Vehicle tracking & signals
 │
-├── docker-compose.yml    ← Run everything with one command
-└── README.md             ← This file
+├── backend/                            ← FastAPI inference server
+│   ├── main.py                         ← API routes & logic
+│   ├── requirements.txt                ← Python dependencies
+│   ├── Dockerfile                      ← Backend container
+│   └── model.pkl                       ← Trained YOLOv8 weights
+│
+├── frontend/                           ← Web dashboard
+│   ├── index.html                      ← Main UI
+│   ├── style.css                       ← Styling
+│   └── script.js                       ← Frontend logic
+│
+├── main.py                             ← Standalone entry point (local run)
+├── requirements.txt                    ← Top-level dependencies
+├── docker-compose.yml                  ← Run full stack with one command
+└── README.md
 ```
 
 ## 🔌Backend API Endpoints
