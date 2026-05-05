@@ -15,7 +15,7 @@ emergency-vehicle-detector/
 │   ├── main.py           ← FastAPI app (your API)
 │   ├── requirements.txt  ← Python packages
 │   ├── Dockerfile        ← Containerise the backend
-│   └── model.pkl         ← ⬅ PUT YOUR MODEL HERE
+│   └── model.pkl         
 │
 ├── frontend/
 │   └── index.html
