@@ -1,14 +1,3 @@
-"""
-Emergency Vehicle Detection API
-================================
-A learning project - FastAPI backend that:
-- Accepts image or video uploads
-- Runs emergency vehicle detection using model.pkl
-- Returns vehicle count + density info
-
-Run with: uvicorn main:app --reload
-"""
-
 import os
 import cv2
 import pickle
@@ -24,7 +13,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 
-# ── App setup ──────────────────────────────────────────────────────────────────
+
 app = FastAPI(
     title="🚨 Emergency Vehicle Detector",
     description="Detects emergency vehicles in images and videos using a trained ML model.",
@@ -66,7 +55,7 @@ async def lifespan(app: FastAPI):
     load_model()
     logger.info("✅ Server started, model loaded!")
     
-    yield  # ← Server is running while we're here
+    yield  
     
     # Code here runs AFTER the server shuts down (cleanup)
     logger.info("🛑 Server shutting down...")
@@ -109,7 +98,7 @@ def detect_in_frame(frame: np.ndarray) -> dict:
         label = int(model.predict(X)[0])
         confidence = 1.0   # no probability available
 
-    # label=1 → emergency vehicle detected (adjust if your labels differ)
+    # label=1 → emergency vehicle detected 
     return {"is_emergency": bool(label == 1), "confidence": confidence}
 
 # ── Helper: compute density label from count / area ────────────────────────────
