@@ -1,6 +1,6 @@
 # 🚨 Emergency Vehicle Detector — End-to-End Project
 
-A beginner-friendly project that:
+A end to end project that:
 - Takes an **image or video** as input
 - Runs **model.pkl** emergency vehicle detector
 - Returns **vehicle count**, **density**, and **density per second** (video)
