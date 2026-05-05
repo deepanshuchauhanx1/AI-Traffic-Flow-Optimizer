@@ -79,3 +79,6 @@ Frontend shows results
 | Fitness Score | 92.5% |
 
 ---
+# Future work:
+- Connect Front End 
+- deployment
