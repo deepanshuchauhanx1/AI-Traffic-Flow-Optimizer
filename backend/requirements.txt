@@ -1,42 +1,46 @@
-# ─── Core API ─────────────────────────────────────────────────────────────────
-fastapi==0.115.0              # Web framework
-uvicorn[standard]==0.30.6     # ASGI server (standard = websockets + httptools)
-python-multipart==0.0.12      # Required for FastAPI file uploads
+# ============================================================
+#   Emergency Vehicle Detection API  —  requirements.txt
+#
+#   Compatible with:  Python 3.10 / 3.11 / 3.12 / 3.13
+#   Install with:     pip install -r requirements.txt
+# ============================================================
 
-# ─── ML / Inference ───────────────────────────────────────────────────────────
-ultralytics==8.3.0            # YOLO model loading + inference
-torch==2.4.1                  # PyTorch backend (CPU build — swap for +cu121 for GPU)
-torchvision==0.19.1           # Required by ultralytics
-Pillow==10.4.0                # Image loading for YOLO
-numpy==1.26.4                 # Array ops (pin <2.0 for torch compat)
+# ── Web framework ────────────────────────────────────────────
+fastapi==0.136.1
+uvicorn[standard]==0.34.3
+python-multipart==0.0.20
 
-# ─── Video / Image processing ─────────────────────────────────────────────────
-opencv-python-headless==4.10.0.84  # Frame extraction, video I/O (headless = no GUI deps)
+# ── Image & Computer Vision ──────────────────────────────────
+Pillow==11.2.1
+opencv-python-headless==4.11.0.86
+numpy==2.2.6
 
-# ─── Async & Performance ──────────────────────────────────────────────────────
-redis==5.0.8                  # Caching layer (Phase 3)
-aiofiles==24.1.0              # Async file I/O for large uploads
-anyio==4.6.2                  # Async primitives (used by FastAPI internally)
+# ── Machine learning ─────────────────────────────────────────
+scikit-learn==1.7.1
+ultralytics==8.3.0
+torch==2.4.1
+torchvision==0.19.1
 
-# ─── Auth & Rate limiting ─────────────────────────────────────────────────────
-slowapi==0.1.9                # Rate limiting middleware for FastAPI
-python-jose[cryptography]==3.3.0   # JWT token creation/validation
-passlib[bcrypt]==1.7.4        # Password hashing (for API key management)
+# ── Async & Performance ──────────────────────────────────────
+redis==5.0.8
+aiofiles==24.1.0
+anyio==4.6.2
 
-# ─── Observability ────────────────────────────────────────────────────────────
-prometheus-fastapi-instrumentator==7.0.0  # Auto /metrics endpoint
-python-json-logger==2.0.7     # Structured JSON logs (better for cloud log viewers)
-sentry-sdk[fastapi]==2.14.0   # Error tracking (free tier available)
+# ── Auth & Rate limiting ─────────────────────────────────────
+slowapi==0.1.9
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4
 
-# ─── Testing ──────────────────────────────────────────────────────────────────
-pytest==8.3.3                 # Test runner
-pytest-asyncio==0.23.8        # Async test support
-httpx==0.27.2                 # Async HTTP client for FastAPI TestClient
-pytest-cov==5.0.0             # Coverage reporting
+# ── Observability ────────────────────────────────────────────
+prometheus-fastapi-instrumentator==7.0.0
+python-json-logger==2.0.7
+sentry-sdk[fastapi]==2.14.0
 
-# ─── Dev tools ────────────────────────────────────────────────────────────────
-ruff==0.6.9                   # Linter + formatter (replaces flake8 + black)
-pre-commit==3.8.0             # Git hooks for lint on commit
-python-dotenv==1.0.1          # Load .env files for local config
-
-
+# ── Testing & Dev tools ──────────────────────────────────────
+pytest==8.3.3
+pytest-asyncio==0.23.8
+httpx==0.27.2
+pytest-cov==5.0.0
+ruff==0.6.9
+pre-commit==3.8.0
+python-dotenv==1.0.1
